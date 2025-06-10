@@ -29,3 +29,4 @@ func (s *GameScene) Draw(screen *ebiten.Image) {
 	screen.Fill(color.Black) // black background
 	s.player.Draw(screen)
 }
+

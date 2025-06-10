@@ -23,3 +23,23 @@ go.work.sum
 
 # env file
 .env
+
+# Archive files
+*.zip
+*.tar.gz
+*.tar.xz
+*.tar.bz2
+*.tar.lz
+*.tar.zst
+
+# Backup files
+*.bak
+*.swp
+
+# IDE files
+*.idea/
+*.vscode/
+
+# Other
+_potential_assets/*
+samples/*

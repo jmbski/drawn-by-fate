@@ -33,7 +33,7 @@ func NewGame() *Game {
 func (g *Game) Update() error {
 	g.TurnCounter++
 	if g.Turn == PlayerTurn && g.TurnCounter > 15 {
-		TryMovePlayer(g)
+		TakePlayerAction(g)
 	}
 
 	if g.Turn == MonsterTurn {
@@ -48,6 +48,8 @@ func (g *Game) Draw(screen *ebiten.Image) {
 	level := g.Map.CurrentLevel
 	level.DrawLevel(screen)
 	ProcessRenderables(g, level, screen)
+	ProcessUserLog(g, screen)
+	ProcessHUD(g, screen)
 }
 
 // Layout will return the screen dimensions.
@@ -60,6 +62,7 @@ func main() {
 	g := NewGame()
 
 	ebiten.SetWindowResizingMode(ebiten.WindowResizingModeEnabled)
+	ebiten.SetFullscreen(true)
 	ebiten.SetWindowTitle("Tower")
 	if err := ebiten.RunGame(g); err != nil {
 		log.Fatal(err)
