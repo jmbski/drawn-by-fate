@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Tileset Transformations",
+    "description": "Schema for allowed transformations for tiles within a tileset.",
+    "type": "object",
+    "properties": {
+        "hflip": {
+            "type": "boolean",
+            "description": "Indicates whether tiles can be flipped horizontally."
+        },
+        "vflip": {
+            "type": "boolean",
+            "description": "Indicates whether tiles can be flipped vertically."
+        },
+        "rotate": {
+            "type": "boolean",
+            "description": "Indicates whether tiles can be rotated in 90-degree increments."
+        },
+        "preferuntransformed": {
+            "type": "boolean",
+            "description": "Indicates whether untransformed tiles remain preferred, or if transformed tiles are used to produce more variations."
+        }
+    },
+    "required": [
+        "hflip",
+        "vflip",
+        "rotate",
+        "preferuntransformed"
+    ]
+}

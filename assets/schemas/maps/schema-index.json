@@ -1,0 +1,17 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "TiledSchemaIndex",
+    "type": "object",
+    "description": "Schema definition that references the various top-level schemas in the directory for automation purposes",
+    "properties": {
+        "map": {
+            "$ref": "./tiled-map.schema.json"
+        },
+        "tileset": {
+            "$ref": "./tiled-tileset.schema.json"
+        }
+    },
+    "automation_config": {
+        "description": "Config settings for automation features, not used for actual schema definition"
+    }
+}

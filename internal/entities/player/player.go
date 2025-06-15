@@ -1,13 +1,31 @@
 package player
 
 import (
-	"image/color"
+	cmp "drawn-by-fate/internal/components"
 
-	"github.com/hajimehoshi/ebiten/v2"
-	"github.com/hajimehoshi/ebiten/v2/vector"
+	"github.com/mlange-42/ark/ecs"
 )
 
-type Player struct {
+type PlayerMap = ecs.Map8[
+	cmp.Player,
+	cmp.BaseMovementSpeed,
+	cmp.Combatant,
+	cmp.Controllable,
+	cmp.Defense,
+	cmp.Faction,
+	cmp.Health,
+	cmp.Experience,
+]
+
+type Player = ecs.Map5[
+	cmp.Player,
+	cmp.BaseMovementSpeed,
+	cmp.Movable,
+	cmp.Controllable,
+	cmp.Renderable,
+]
+
+/* type Player struct {
 	X, Y  float32
 	Speed float32
 }
@@ -27,8 +45,16 @@ func (p *Player) Update() {
 	}
 }
 
+func NewPlayer() *Player {
+	return &Player{
+		X:     1,
+		Y:     1,
+		Speed: 1,
+	}
+}
+
 func (p *Player) Draw(screen *ebiten.Image) {
 	//result := (&colorMatrix).Apply(colorWhite)
 	//ebitenutil.DrawRect(screen, p.X, p.Y, 16, 16, result)
 	vector.DrawFilledRect(screen, p.X, p.Y, 16, 16, color.White, false)
-}
+} */

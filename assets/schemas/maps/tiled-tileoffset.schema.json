@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Tile Offset",
+    "description": "Schema for an offset in pixels for drawing tiles from a tileset.",
+    "type": "object",
+    "properties": {
+        "x": {
+            "type": "integer",
+            "description": "Horizontal offset in pixels"
+        },
+        "y": {
+            "type": "integer",
+            "description": "Vertical offset in pixels (positive is down)"
+        }
+    },
+    "required": [
+        "x",
+        "y"
+    ]
+}

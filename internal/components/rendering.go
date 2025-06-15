@@ -1,5 +1,25 @@
 package components
 
+import "github.com/hajimehoshi/ebiten/v2"
+
+type Renderable struct {
+	Image *ebiten.Image
+	X     float64 // exact X coordinate position
+	Y     float64 // exact Y coordinate position
+}
+
+func (r *Renderable) Value() (x, y *float64) {
+	return &r.X, &r.Y
+}
+
+func NewRenderable(image *ebiten.Image, x, y float64) *Renderable {
+	return &Renderable{
+		Image: image,
+		X:     x,
+		Y:     y,
+	}
+}
+
 // 2D position coordinate
 type Position struct {
 	X float64
