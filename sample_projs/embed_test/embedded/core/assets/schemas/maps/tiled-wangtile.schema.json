@@ -1,0 +1,25 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Wang Tile",
+    "description": "Schema for a specific tile's Wang ID (color indexes for its corners/edges).",
+    "type": "object",
+    "properties": {
+        "tileid": {
+            "type": "integer",
+            "description": "Local ID of the tile."
+        },
+        "wangid": {
+            "type": "array",
+            "items": {
+                "type": "integer",
+                "minimum": 0,
+                "maximum": 255
+            },
+            "description": "Array of Wang color indexes (`uchar`)."
+        }
+    },
+    "required": [
+        "tileid",
+        "wangid"
+    ]
+}

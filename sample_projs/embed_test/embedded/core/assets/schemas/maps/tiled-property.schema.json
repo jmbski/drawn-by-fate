@@ -1,0 +1,122 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Property",
+    "description": "Schema for a custom Property.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of the property"
+        },
+        "type": {
+            "type": "string",
+            "enum": [
+                "string",
+                "int",
+                "float",
+                "bool",
+                "color",
+                "file",
+                "object",
+                "class"
+            ],
+            "default": "string",
+            "description": "Type of the property (`string` (default), `int`, `float`, `bool`, `color`, `file`, `object` or `class` (since 0.16, with `color` and `file` added in 0.17, `object` added in 1.4 and `class` added in 1.8))"
+        },
+        "propertytype": {
+            "type": "string",
+            "description": "Name of the custom property type, when applicable (since 1.8)"
+        },
+        "value": {
+            "description": "Value of the property"
+        }
+    },
+    "required": [
+        "name",
+        "type",
+        "value"
+    ],
+    "oneOf": [
+        {
+            "properties": {
+                "type": {
+                    "const": "string"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "int"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "float"
+                },
+                "value": {
+                    "type": "number"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "bool"
+                },
+                "value": {
+                    "type": "boolean"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "color"
+                },
+                "value": {
+                    "type": "string",
+                    "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "file"
+                },
+                "value": {
+                    "type": "string"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "object"
+                },
+                "value": {
+                    "type": "integer"
+                }
+            }
+        },
+        {
+            "properties": {
+                "type": {
+                    "const": "class"
+                },
+                "value": {
+                    "type": "object"
+                }
+            }
+        }
+    ]
+}

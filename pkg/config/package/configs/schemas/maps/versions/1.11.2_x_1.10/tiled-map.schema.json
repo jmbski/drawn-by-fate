@@ -1,0 +1,150 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Map",
+    "description": "Schema for the Tiled Map object.",
+    "type": "object",
+    "properties": {
+        "backgroundcolor": {
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$",
+            "description": "Hex-formatted color (#RRGGBB or #AARRGGBB) (optional)"
+        },
+        "class": {
+            "type": "string",
+            "description": "The class of the map (since 1.9, optional)"
+        },
+        "compressionlevel": {
+            "type": "integer",
+            "default": -1,
+            "description": "The compression level to use for tile layer data (defaults to -1, which means to use the algorithm default)"
+        },
+        "height": {
+            "type": "integer",
+            "description": "Number of tile rows"
+        },
+        "hexsidelength": {
+            "type": "integer",
+            "description": "Length of the side of a hex tile in pixels (hexagonal maps only)"
+        },
+        "infinite": {
+            "type": "boolean",
+            "description": "Whether the map has infinite dimensions"
+        },
+        "layers": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-layer.schema.yaml"
+            },
+            "description": "Array of Layers"
+        },
+        "nextlayerid": {
+            "type": "integer",
+            "description": "Auto-increments for each layer"
+        },
+        "nextobjectid": {
+            "type": "integer",
+            "description": "Auto-increments for each placed object"
+        },
+        "orientation": {
+            "type": "string",
+            "enum": [
+                "orthogonal",
+                "isometric",
+                "staggered",
+                "hexagonal"
+            ],
+            "description": "`orthogonal`, `isometric`, `staggered` or `hexagonal`"
+        },
+        "parallaxoriginx": {
+            "type": "number",
+            "default": 0,
+            "description": "X coordinate of the parallax origin in pixels (since 1.8, default: 0)"
+        },
+        "parallaxoriginy": {
+            "type": "number",
+            "default": 0,
+            "description": "Y coordinate of the parallax origin in pixels (since 1.8, default: 0)"
+        },
+        "properties": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-property.schema.yaml"
+            },
+            "description": "Array of Properties"
+        },
+        "renderorder": {
+            "type": "string",
+            "enum": [
+                "right-down",
+                "right-up",
+                "left-down",
+                "left-up"
+            ],
+            "description": "`right-down` (the default), `right-up`, `left-down` or `left-up` (currently only supported for orthogonal maps)"
+        },
+        "staggeraxis": {
+            "type": "string",
+            "enum": [
+                "x",
+                "y"
+            ],
+            "description": "`x` or `y` (staggered / hexagonal maps only)"
+        },
+        "staggerindex": {
+            "type": "string",
+            "enum": [
+                "odd",
+                "even"
+            ],
+            "description": "`odd` or `even` (staggered / hexagonal maps only)"
+        },
+        "tiledversion": {
+            "type": "string",
+            "description": "The Tiled version used to save the file",
+            "default": "1.11.2"
+        },
+        "tileheight": {
+            "type": "integer",
+            "description": "Map grid height"
+        },
+        "tilesets": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-tileset.schema.yaml"
+            },
+            "description": "Array of Tilesets"
+        },
+        "tilewidth": {
+            "type": "integer",
+            "description": "Map grid width"
+        },
+        "type": {
+            "type": "string",
+            "const": "map",
+            "description": "`map` (since 1.0)"
+        },
+        "version": {
+            "type": "string",
+            "description": "The JSON format version (previously a number, saved as string since 1.6)",
+            "default": "1.10"
+        },
+        "width": {
+            "type": "integer",
+            "description": "Number of tile columns"
+        }
+    },
+    "required": [
+        "height",
+        "layers",
+        "nextlayerid",
+        "nextobjectid",
+        "orientation",
+        "renderorder",
+        "tileheight",
+        "tilesets",
+        "tilewidth",
+        "type",
+        "version",
+        "width"
+    ]
+}

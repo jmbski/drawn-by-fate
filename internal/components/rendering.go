@@ -1,6 +1,10 @@
 package components
 
-import "github.com/hajimehoshi/ebiten/v2"
+import (
+	"drawn-by-fate/pkg/models"
+
+	"github.com/hajimehoshi/ebiten/v2"
+)
 
 type Renderable struct {
 	Image *ebiten.Image
@@ -10,6 +14,10 @@ type Renderable struct {
 
 func (r *Renderable) Value() (x, y *float64) {
 	return &r.X, &r.Y
+}
+
+func (r *Renderable) Vec2() models.Vec2 {
+	return models.NewVec2(r.X, r.Y)
 }
 
 func NewRenderable(image *ebiten.Image, x, y float64) *Renderable {
@@ -43,8 +51,12 @@ type Velocity struct {
 	Y float64
 }
 
-func (p *Velocity) Value() (x, y *float64) {
-	return &p.X, &p.Y
+func (v *Velocity) Value() (x, y *float64) {
+	return &v.X, &v.Y
+}
+
+func (v *Velocity) Vec2() models.Vec2 {
+	return models.NewVec2(v.X, v.Y)
 }
 
 func NewVelocity(x, y float64) *Velocity {
@@ -52,4 +64,9 @@ func NewVelocity(x, y float64) *Velocity {
 		X: x,
 		Y: y,
 	}
+}
+
+type Sprite struct {
+	Image *ebiten.Image
+	// Add fields for sprite sheet coordinates, animation state, etc. later
 }

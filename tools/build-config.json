@@ -1,0 +1,10 @@
+{
+    "output_dir": "${root}/pkg/models/auto_types",
+    "schema_dir": "${root}/pkg/config/package/configs/schemas",
+    "constr_name": "auto_constructors.go",
+    "root_schemas": [
+        "${schemas}/game_config.schema.yaml",
+        "${schemas}/maps/versions/1.11.2_x_1.10/tiled-map.schema.yaml",
+        "${schemas}/ecs/v0.0.1/entity-defs.schema.yaml"
+    ]
+}

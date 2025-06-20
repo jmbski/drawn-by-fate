@@ -1,0 +1,75 @@
+# yaml-language-server: $schema=http://json-schema.org/draft-07/schema#
+title: CommonProps
+description: Common properties for all schema objects
+type: object
+properties:
+  name:
+    type: string
+  schemaVersion:
+    type: string
+    description: Version of the schema
+    const: 0.0.1
+  appVersion:
+    type: string
+    description: Version of the app
+    const: 0.0.1
+  createdOn:
+    type: string
+    description: 'ISO 8601 timestamp of when the object was created. @todo update
+      tooling scripts to handle "format": "date-time"'
+  lastModifiedOn:
+    type: string
+    description: 'ISO 8601 timestamp of last modification. @todo update tooling scripts
+      to handle "format": "date-time"'
+  createdBy:
+    type: string
+    description: User who created the object
+    default: system
+  lastModifiedBy:
+    type: string
+    description: User who last modified the object
+  description:
+    type: string
+    description: Description of the object
+  uuid:
+    type: string
+    description: Unique identifier for the object
+  status:
+    type: string
+    enum:
+    - active
+    - archived
+    - deleted
+    - draft
+    description: Lifecycle state of the object
+  tags:
+    type: array
+    items:
+      type: string
+    description: Optional user-defined tags
+required:
+- schemaVersion
+- appVersion
+- createdOn
+- lastModifiedOn
+- uuid
+definitions:
+  HeightWidthPair:
+    type: object
+    description: Width and Height pairs for different visual elements such as screen
+      size, screen resolution, etc..
+    properties:
+      width:
+        type: integer
+      height:
+        type: integer
+    required:
+    - height
+    - width
+  Vector2:
+    type: object
+    properties:
+      x:
+        type: number
+      y:
+        type: number

@@ -1,0 +1,96 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Object",
+    "description": "Schema for an Object on an object layer.",
+    "type": "object",
+    "properties": {
+        "ellipse": {
+            "type": "boolean",
+            "default": false,
+            "description": "Used to mark an object as an ellipse"
+        },
+        "gid": {
+            "type": "integer",
+            "description": "Global tile ID, only if object represents a tile"
+        },
+        "height": {
+            "type": "number",
+            "description": "Height in pixels."
+        },
+        "id": {
+            "type": "integer",
+            "description": "Incremental ID, unique across all objects"
+        },
+        "name": {
+            "type": "string",
+            "description": "String assigned to name field in editor"
+        },
+        "point": {
+            "type": "boolean",
+            "default": false,
+            "description": "Used to mark an object as a point"
+        },
+        "polygon": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-point.schema.yaml"
+            },
+            "description": "Array of Points, in case the object is a polygon"
+        },
+        "polyline": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-point.schema.yaml"
+            },
+            "description": "Array of Points, in case the object is a polyline"
+        },
+        "properties": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-property.schema.yaml"
+            },
+            "description": "Array of Properties"
+        },
+        "rotation": {
+            "type": "number",
+            "description": "Angle in degrees clockwise"
+        },
+        "template": {
+            "type": "string",
+            "description": "Reference to a template file, in case object is a template instance"
+        },
+        "text": {
+            "$ref": "./tiled-text.schema.yaml",
+            "description": "Only used for text objects"
+        },
+        "type": {
+            "type": "string",
+            "description": "The class of the object (was saved as `class` in 1.9, optional)"
+        },
+        "visible": {
+            "type": "boolean",
+            "description": "Whether object is shown in editor."
+        },
+        "width": {
+            "type": "number",
+            "description": "Width in pixels."
+        },
+        "x": {
+            "type": "number",
+            "description": "X coordinate in pixels"
+        },
+        "y": {
+            "type": "number",
+            "description": "Y coordinate in pixels"
+        }
+    },
+    "required": [
+        "id",
+        "name",
+        "x",
+        "y",
+        "width",
+        "height",
+        "visible"
+    ]
+}

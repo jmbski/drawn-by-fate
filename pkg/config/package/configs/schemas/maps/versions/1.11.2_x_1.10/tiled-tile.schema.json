@@ -1,0 +1,83 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Tile Definition",
+    "description": "Schema for an individual Tile within a Tileset.",
+    "type": "object",
+    "properties": {
+        "animation": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-frame.schema.yaml"
+            },
+            "description": "Array of Frames for tile animation"
+        },
+        "id": {
+            "type": "integer",
+            "description": "Local ID of the tile"
+        },
+        "image": {
+            "type": "string",
+            "description": "Image representing this tile (optional, used for image collection tilesets)"
+        },
+        "imageheight": {
+            "type": "integer",
+            "description": "Height of the tile image in pixels"
+        },
+        "imagewidth": {
+            "type": "integer",
+            "description": "Width of the tile image in pixels"
+        },
+        "objectgroup": {
+            "$ref": "./tiled-layer.schema.yaml",
+            "properties": {
+                "type": {
+                    "const": "objectgroup"
+                }
+            },
+            "description": "Layer with type `objectgroup`, when collision shapes are specified (optional)"
+        },
+        "probability": {
+            "type": "number",
+            "description": "Percentage chance this tile is chosen when competing with others in the editor (optional)"
+        },
+        "properties": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-property.schema.yaml"
+            },
+            "description": "Array of Properties"
+        },
+        "terrain": {
+            "type": "array",
+            "items": {
+                "type": "integer"
+            },
+            "description": "Index of terrain for each corner of tile (optional, replaced by Wang sets since 1.5)"
+        },
+        "type": {
+            "type": "string",
+            "description": "The class of the tile (was saved as `class` in 1.9, optional)"
+        },
+        "x": {
+            "type": "integer",
+            "default": 0,
+            "description": "The X position of the sub-rectangle representing this tile (default: 0)"
+        },
+        "y": {
+            "type": "integer",
+            "default": 0,
+            "description": "The Y position of the sub-rectangle representing this tile (default: 0)"
+        },
+        "width": {
+            "type": "integer",
+            "description": "The width of the sub-rectangle representing this tile (defaults to the image width)"
+        },
+        "height": {
+            "type": "integer",
+            "description": "The height of the sub-rectangle representing this tile (defaults to the image height)"
+        }
+    },
+    "required": [
+        "id"
+    ]
+}

@@ -1,0 +1,219 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Component Definitions",
+    "description": "Schema definitions for the initial baseline version of the components used to define entities",
+    "type": "null",
+    "version": "0.0.1",
+    "properties": {
+        "actor_type": {
+            "type": "string",
+            "description": "Add this component to include the matching Actor Tag component in the entity",
+            "enum": [
+                "Player",
+                "Monster",
+                "Summonable",
+                "Ally",
+                "NPC"
+            ]
+        },
+        "tag_component": {
+            "type": "string",
+            "description": "Tags are empty components used to filter Entities",
+            "enum": [
+                "Combatant",
+                "InputControlled"
+            ]
+        },
+        "combatant": {
+            "type": "boolean"
+        },
+        "ai_controlled": {
+            "type": "object",
+            "properties": {
+                "move_pattern": {
+                    "type": "string",
+                    "enum": [
+                        "ai_random",
+                        "ai_to_nearest"
+                    ]
+                },
+                "tick_countdown": {
+                    "type": "number"
+                },
+                "dir_x": {
+                    "type": "number"
+                },
+                "dir_y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "move_pattern"
+            ]
+        },
+        "offense": {
+            "type": "object",
+            "properties": {
+                "attack_damage": {
+                    "type": "number"
+                },
+                "attack_speed": {
+                    "type": "number"
+                },
+                "range": {
+                    "type": "number"
+                },
+                "area": {
+                    "type": "number"
+                },
+                "type": {
+                    "type": "string",
+                    "enum": [
+                        "melee",
+                        "ranged"
+                    ]
+                }
+            },
+            "required": [
+                "attack_damage",
+                "attack_speed",
+                "range",
+                "area",
+                "type"
+            ]
+        },
+        "defense": {
+            "type": "object",
+            "properties": {
+                "armor": {
+                    "type": "number"
+                },
+                "evasion": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "armor",
+                "evasion"
+            ]
+        },
+        "health": {
+            "type": "object",
+            "properties": {
+                "max": {
+                    "type": "number"
+                },
+                "current": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "max",
+                "current"
+            ]
+        },
+        "experience": {
+            "type": "object",
+            "properties": {
+                "xp": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "xp"
+            ]
+        },
+        "exp_per_time": {
+            "type": "object",
+            "properties": {
+                "interval": {
+                    "type": "number"
+                },
+                "amount": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "interval",
+                "amount"
+            ]
+        },
+        "exp_gain_percent": {
+            "type": "object",
+            "properties": {
+                "percentage": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "percentage"
+            ]
+        },
+        "level": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "integer"
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "base_movement_speed": {
+            "type": "object",
+            "properties": {
+                "value": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "renderable": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string"
+                },
+                "x": {
+                    "type": "number"
+                },
+                "y": {
+                    "type": "number"
+                }
+            },
+            "required": [
+                "image",
+                "x",
+                "y"
+            ]
+        },
+        "velocity": {
+            "$ref": "../../common/common-props.schema.yaml#/definitions/Vector2"
+        },
+        "sprite": {
+            "type": "object",
+            "properties": {
+                "image": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "image"
+            ]
+        },
+        "meta_data": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "uuid": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

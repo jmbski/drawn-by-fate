@@ -1,0 +1,22 @@
+# yaml-language-server: $schema=http://json-schema.org/draft-07/schema#
+title: Tiled Tileset Grid
+description: Schema for common grid settings for tiles within a tileset.
+type: object
+properties:
+  height:
+    type: integer
+    description: Cell height of tile grid
+  orientation:
+    type: string
+    enum:
+    - orthogonal
+    - isometric
+    default: orthogonal
+    description: '`orthogonal` (default) or `isometric`'
+  width:
+    type: integer
+    description: Cell width of tile grid
+required:
+- height
+- orientation
+- width

@@ -1,0 +1,9 @@
+{
+    "$schema": "./schemas/game_config.schema.json",
+    "enabled_mod_ids": [],
+    "screen_mode": "window",
+    "screen_resolution": {
+        "width": 640,
+        "height": 480
+    }
+}

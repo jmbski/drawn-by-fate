@@ -5,7 +5,7 @@
 package scenes
 
 import (
-	"drawn-by-fate/internal/config"
+	"drawn-by-fate/pkg/config"
 	"image/color"
 
 	"github.com/hajimehoshi/ebiten/v2"

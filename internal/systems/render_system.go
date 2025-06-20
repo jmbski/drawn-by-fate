@@ -1,20 +1,33 @@
 package systems
 
 import (
-	"drawn-by-fate/internal/engine"
+	cmp "drawn-by-fate/internal/components"
 
 	"github.com/hajimehoshi/ebiten/v2"
+	"github.com/mlange-42/ark/ecs"
 )
 
-func ProcessRenderables(game *engine.Game, screen *ebiten.Image) {
-	query := game.Context.Renderables.Query()
+type RenderSystem struct {
+	filter *ecs.Filter1[cmp.Renderable]
+}
 
+func (s *RenderSystem) Draw(screen *ebiten.Image, world *ecs.World) {
+	query := s.filter.Query()
 	for query.Next() {
-		render := query.Get()
-		// TODO: add some checks
+		renderable := query.Get()
 
 		op := &ebiten.DrawImageOptions{}
-		op.GeoM.Translate(render.X, render.Y)
-		screen.DrawImage(render.Image, op)
+
+		op.GeoM.Translate(renderable.X, renderable.Y)
+
+		screen.DrawImage(renderable.Image, op)
+
 	}
 }
+
+func NewRenderSystem(world *ecs.World) *RenderSystem {
+	return &RenderSystem{
+		filter: ecs.NewFilter1[cmp.Renderable](world).Register(),
+	}
+}
+

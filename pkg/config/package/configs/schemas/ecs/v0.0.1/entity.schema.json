@@ -1,0 +1,44 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "ECS Entity",
+    "description": "Generic Entity definition",
+    "type": "object",
+    "properties": {
+        "player": {
+            "type": "boolean"
+        },
+        "monster": {
+            "type": "boolean"
+        },
+        "summonable": {
+            "type": "boolean"
+        },
+        "ally": {
+            "type": "boolean"
+        },
+        "npc": {
+            "type": "boolean"
+        },
+        "combatant": {
+            "type": "boolean"
+        },
+        "input_controlled": {
+            "type": "boolean"
+        },
+        "ai_controlled": {
+            "$ref": "./components.schema.yaml#/properties/ai_controlled"
+        },
+        "offense": {
+            "$ref": "./components.schema.yaml#/properties/offense"
+        },
+        "velocity": {
+            "$ref": "./components.schema.yaml#/properties/velocity"
+        },
+        "renderable": {
+            "$ref": "./components.schema.yaml#/properties/renderable"
+        },
+        "base_movement_speed": {
+            "$ref": "./components.schema.yaml#/properties/base_movement_speed"
+        }
+    }
+}

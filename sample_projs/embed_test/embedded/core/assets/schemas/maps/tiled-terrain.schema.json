@@ -1,0 +1,27 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Terrain",
+    "description": "Schema for a terrain type within a tileset.",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "Name of terrain"
+        },
+        "properties": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-property.schema.json"
+            },
+            "description": "Array of Properties"
+        },
+        "tile": {
+            "type": "integer",
+            "description": "Local ID of tile representing terrain"
+        }
+    },
+    "required": [
+        "name",
+        "tile"
+    ]
+}

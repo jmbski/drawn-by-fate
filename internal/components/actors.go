@@ -11,8 +11,13 @@ type NPC struct{}
 
 // Categorizing/Functional Tag Component structs
 type Combatant struct{}
-type HasAi struct{}
-type Controllable struct{}
+type AiControlled struct {
+	MovePattern   AiMovePattern
+	TickCountDown int
+	DirX          float64
+	DirY          float64
+}
+type InputControlled struct{}
 type Faction struct{}
 
 // Meta Info/Context/Display Component structs

@@ -1,0 +1,168 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Tileset",
+    "description": "Schema for a Tiled Tileset.",
+    "type": "object",
+    "properties": {
+        "backgroundcolor": {
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$",
+            "description": "Hex-formatted color (#RRGGBB or #AARRGGBB) (optional)"
+        },
+        "class": {
+            "type": "string",
+            "description": "The class of the tileset (since 1.9, optional)"
+        },
+        "columns": {
+            "type": "integer",
+            "description": "The number of tile columns in the tileset"
+        },
+        "fillmode": {
+            "type": "string",
+            "enum": [
+                "stretch",
+                "preserve-aspect-fit"
+            ],
+            "default": "stretch",
+            "description": "The fill mode to use when rendering tiles from this tileset (`stretch` (default) or `preserve-aspect-fit`) (since 1.9)"
+        },
+        "firstgid": {
+            "type": "integer",
+            "description": "GID corresponding to the first tile in the set"
+        },
+        "grid": {
+            "$ref": "./tiled-grid.schema.yaml",
+            "description": "(optional)"
+        },
+        "image": {
+            "type": "string",
+            "description": "Image used for tiles in this set"
+        },
+        "imageheight": {
+            "type": "integer",
+            "description": "Height of source image in pixels"
+        },
+        "imagewidth": {
+            "type": "integer",
+            "description": "Width of source image in pixels"
+        },
+        "margin": {
+            "type": "integer",
+            "description": "Buffer between image edge and first tile (pixels)"
+        },
+        "name": {
+            "type": "string",
+            "description": "Name given to this tileset"
+        },
+        "objectalignment": {
+            "type": "string",
+            "enum": [
+                "unspecified",
+                "topleft",
+                "top",
+                "topright",
+                "left",
+                "center",
+                "right",
+                "bottomleft",
+                "bottom",
+                "bottomright"
+            ],
+            "default": "unspecified",
+            "description": "Alignment to use for tile objects (`unspecified` (default), `topleft`, `top`, `topright`, `left`, `center`, `right`, `bottomleft`, `bottom` or `bottomright`) (since 1.4)"
+        },
+        "properties": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-property.schema.yaml"
+            },
+            "description": "Array of Properties"
+        },
+        "source": {
+            "type": "string",
+            "description": "The external file that contains this tilesets data"
+        },
+        "spacing": {
+            "type": "integer",
+            "description": "Spacing between adjacent tiles in image (pixels)"
+        },
+        "terrains": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-terrain.schema.yaml"
+            },
+            "description": "Array of Terrains (optional)"
+        },
+        "tilecount": {
+            "type": "integer",
+            "description": "The number of tiles in this tileset"
+        },
+        "tiledversion": {
+            "type": "string",
+            "description": "The Tiled version used to save the file"
+        },
+        "tileheight": {
+            "type": "integer",
+            "description": "Maximum height of tiles in this set"
+        },
+        "tileoffset": {
+            "$ref": "./tiled-tileoffset.schema.yaml",
+            "description": "(optional)"
+        },
+        "tilerendersize": {
+            "type": "string",
+            "enum": [
+                "tile",
+                "grid"
+            ],
+            "default": "tile",
+            "description": "The size to use when rendering tiles from this tileset on a tile layer (`tile` (default) or `grid`) (since 1.9)"
+        },
+        "tiles": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-tile.schema.yaml"
+            },
+            "description": "Array of Tiles (optional)"
+        },
+        "tilewidth": {
+            "type": "integer",
+            "description": "Maximum width of tiles in this set"
+        },
+        "transformations": {
+            "$ref": "./tiled-transformations.schema.yaml",
+            "description": "Allowed transformations (optional)"
+        },
+        "transparentcolor": {
+            "type": "string",
+            "pattern": "^#([A-Fa-f0-9]{6})$",
+            "description": "Hex-formatted color (#RRGGBB) (optional)"
+        },
+        "type": {
+            "type": "string",
+            "const": "tileset",
+            "description": "`tileset` (for tileset files, since 1.0)"
+        },
+        "version": {
+            "type": "string",
+            "description": "The JSON format version (previously a number, saved as string since 1.6)"
+        },
+        "wangsets": {
+            "type": "array",
+            "items": {
+                "$ref": "./tiled-wangset.schema.yaml"
+            },
+            "description": "Array of Wang sets (since 1.1.5)"
+        }
+    },
+    "required": [
+        "columns",
+        "firstgid",
+        "name",
+        "tilecount",
+        "tileheight",
+        "tilewidth",
+        "type",
+        "version"
+    ]
+}

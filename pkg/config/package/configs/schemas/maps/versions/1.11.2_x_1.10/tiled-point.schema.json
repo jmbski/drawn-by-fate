@@ -1,0 +1,20 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Tiled Point",
+    "description": "Schema for a 2D coordinate point (inferred from common conventions).",
+    "type": "object",
+    "properties": {
+        "x": {
+            "type": "number",
+            "description": "X coordinate"
+        },
+        "y": {
+            "type": "number",
+            "description": "Y coordinate"
+        }
+    },
+    "required": [
+        "x",
+        "y"
+    ]
+}

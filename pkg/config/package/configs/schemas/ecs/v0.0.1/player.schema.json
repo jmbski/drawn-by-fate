@@ -1,0 +1,39 @@
+{
+    "$schema": "https://json-schema.org/draft-07/schema#",
+    "title": "Player Entity",
+    "type": "object",
+    "properties": {
+        "actor_id": {
+            "type": "string"
+        },
+        "actor_type": {
+            "type": "string",
+            "const": "player"
+        },
+        "renderable": {
+            "$ref": "./components.schema.yaml#/properties/renderable"
+        },
+        "velocity": {
+            "$ref": "./components.schema.yaml#/properties/velocity"
+        },
+        "base_movement_speed": {
+            "$ref": "./components.schema.yaml#/properties/base_movement_speed"
+        },
+        "input_controlled": {
+            "type": "boolean",
+            "default": true
+        },
+        "meta_data": {
+            "$ref": "./components.schema.yaml#/properties/meta_data"
+        }
+    },
+    "required": [
+        "actor_id",
+        "actor_type",
+        "renderable",
+        "velocity",
+        "base_movement_speed",
+        "input_controlled",
+        "meta_data"
+    ]
+}

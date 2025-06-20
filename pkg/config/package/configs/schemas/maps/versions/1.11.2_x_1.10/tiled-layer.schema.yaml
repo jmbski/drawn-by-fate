@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=http://json-schema.org/draft-07/schema#
+title: Tiled Layer
+description: Schema for a Tiled Layer, which can be polymorphic based on its 'type'
+  field.
+type: object
+properties:
+  class:
+    type: string
+    description: The class of the layer (since 1.9, optional)
+  id:
+    type: integer
+    description: Incremental ID - unique across all layers
+  locked:
+    type: boolean
+    default: false
+    description: 'Whether layer is locked in the editor (default: false). (since 1.8.2)'
+  name:
+    type: string
+    description: Name assigned to this layer
+  offsetx:
+    type: number
+    default: 0
+    description: 'Horizontal layer offset in pixels (default: 0)'
+  offsety:
+    type: number
+    default: 0
+    description: 'Vertical layer offset in pixels (default: 0)'
+  opacity:
+    type: number
+    minimum: 0
+    maximum: 1
+    description: Value between 0 and 1
+  parallaxx:
+    type: number
+    default: 1
+    description: 'Horizontal parallax factor for this layer (default: 1). (since 1.5)'
+  parallaxy:
+    type: number
+    default: 1
+    description: 'Vertical parallax factor for this layer (default: 1). (since 1.5)'
+  properties:
+    type: array
+    items:
+      $ref: ./tiled-property.schema.yaml
+    description: Array of Properties
+  tintcolor:
+    type: string
+    pattern: ^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{8})$
+    description: 'Hex-formatted tint color (#RRGGBB or #AARRGGBB) that is multiplied
+      with any graphics drawn by this layer or any child layers (optional).'
+  type:
+    type: string
+    enum:
+    - tilelayer
+    - objectgroup
+    - imagelayer
+    - group
+    description: '`tilelayer`, `objectgroup`, `imagelayer` or `group`'
+  visible:
+    type: boolean
+    description: Whether layer is shown or hidden in editor
+  x:
+    type: integer
+    description: Horizontal layer offset in tiles. Always 0.
+  y:
+    type: integer
+    description: Vertical layer offset in tiles. Always 0.
+required:
+- id
+- name
+- type
+- x
+- y
+- opacity
+- visible
+oneOf:
+- properties:
+    type:
+      const: tilelayer
+    chunks:
+      type: array
+      items:
+        $ref: ./tiled-chunk.schema.yaml
+      description: Array of chunks (optional). `tilelayer` only.
+    compression:
+      type: string
+      enum:
+      - zlib
+      - gzip
+      - zstd
+      - ''
+      description: '`zlib`, `gzip`, `zstd` (since 1.3) or empty (default). `tilelayer`
+        only.'
+    data:
+      oneOf:
+      - type: array
+        items:
+          type: integer
+      - type: string
+      description: Array of `unsigned int` (GIDs) or base64-encoded data. `tilelayer`
+        only.
+    encoding:
+      type: string
+      enum:
+      - csv
+      - base64
+      description: '`csv` (default) or `base64`. `tilelayer` only.'
+    height:
+      type: integer
+      description: Row count. Same as map height for fixed-size maps. `tilelayer`
+        only.
+    width:
+      type: integer
+      description: Column count. Same as map width for fixed-size maps. `tilelayer`
+        only.
+    startx:
+      type: integer
+      description: X coordinate where layer content starts (for infinite maps)
+    starty:
+      type: integer
+      description: Y coordinate where layer content starts (for infinite maps)
+  required:
+  - data
+  - height
+  - width
+- properties:
+    type:
+      const: objectgroup
+    draworder:
+      type: string
+      enum:
+      - topdown
+      - index
+      description: '`topdown` (default) or `index`. `objectgroup` only.'
+    objects:
+      type: array
+      items:
+        $ref: ./tiled-object.schema.yaml
+      description: Array of objects. `objectgroup` only.
+  required:
+  - objects
+- properties:
+    type:
+      const: imagelayer
+    image:
+      type: string
+      description: Image used by this layer. `imagelayer` only.
+    imageheight:
+      type: integer
+      description: Height of the image used by this layer. `imagelayer` only. (since
+        1.11.1)
+    imagewidth:
+      type: integer
+      description: Width of the image used by this layer. `imagelayer` only. (since
+        1.11.1)
+    repeatx:
+      type: boolean
+      description: Whether the image drawn by this layer is repeated along the X axis.
+        `imagelayer` only. (since 1.8)
+    repeaty:
+      type: boolean
+      description: Whether the image drawn by this layer is repeated along the Y axis.
+        `imagelayer` only. (since 1.8)
+    transparentcolor:
+      type: string
+      pattern: ^#([A-Fa-f0-9]{6})$
+      description: Hex-formatted color (#RRGGBB) (optional). `imagelayer` only.
+  required:
+  - image
+- properties:
+    type:
+      const: group
+    layers:
+      type: array
+      items:
+        $ref: ./tiled-layer.schema.yaml
+      description: Array of layers. `group` only.
+  required:
+  - layers
