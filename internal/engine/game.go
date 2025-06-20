@@ -20,7 +20,7 @@ var coreInputName = "localPlayerInput"
 type Game struct {
 	World            *ecs.World
 	Context          *core.WorldContext
-	Config           config.GameConfig
+	Config           *config.GameConfig
 	CorePaths        config.CommonPaths
 	InputSystems     systems.SystemMap
 	RenderSystem     *systems.RenderSystem

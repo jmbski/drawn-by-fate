@@ -15,10 +15,10 @@ import (
 var cfg = config.CurrentSettings
 
 func main() {
+	game := engine.NewGame()
 	ebiten.SetWindowSize(config.GetScreenSize())
 	ebiten.SetWindowTitle("Drawn By Fate - Vertical Slice")
 
-	game := engine.NewGame()
 	tmp, err := models.LoadEntityTemplates("core")
 	if err != nil {
 		fmt.Println(err)

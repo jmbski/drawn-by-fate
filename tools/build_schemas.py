@@ -17,7 +17,7 @@ DIR = os.path.dirname(__file__)
 ROOT_DIR = os.path.dirname(DIR)
 
 # Get local Config settings
-CONFIG_PATH = os.path.join(DIR, "build-config.json")
+CONFIG_PATH = os.path.join(DIR, "config.json")
 CONFIG_FILE = {}
 if os.path.exists(CONFIG_PATH):
     with open(CONFIG_PATH, "r", encoding="UTF-8") as fs:
@@ -103,6 +103,7 @@ class Config:
     constr_name: str = ""
     root_schemas: list[str] = field(default_factory=list)
     schema_data: list[tuple[str, str, str, str]] = field(default_factory=list)
+    field_tags: list[str] = field(default_factory=list)
     _mapper: dict[str, str] = field(default_factory=dict)
 
     def __post_init__(self) -> None:
@@ -301,8 +302,8 @@ def compile_go() -> None:
         print(f"Generating types for {schema_path}..")
 
         debug = " --debug=print-schema-resolving" if args.debug else ""
-
-        cmd = f"quicktype --package {package}{debug} --top-level {to_pascal_case(schema_name)}  -s schema {schema_path} -o {go_path}"
+        field_tags = ",".join(Cfg.field_tags)
+        cmd = f"quicktype --package {package}{debug} --field-tags {field_tags} --top-level {to_pascal_case(schema_name)}  -s schema {schema_path} -o {go_path}"
         if args.verbose:
             print(cmd)
         if args.debug:

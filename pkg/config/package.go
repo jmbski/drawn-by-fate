@@ -145,7 +145,7 @@ func NewPackageDir(name string, ignored ...string) (*PackageDir, error) {
 
 	embedded := name == "core"
 
-	cmnPaths, err := NewCommonPaths(path, !embedded)
+	cmnPaths, err := NewCommonPaths(path)
 	if err != nil {
 		return nil, err
 	}

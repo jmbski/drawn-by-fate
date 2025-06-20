@@ -5,6 +5,11 @@
     "root_schemas": [
         "${schemas}/game_config.schema.yaml",
         "${schemas}/maps/versions/1.11.2_x_1.10/tiled-map.schema.yaml",
-        "${schemas}/ecs/v0.0.1/entity-defs.schema.yaml"
+        "${schemas}/ecs/v0.0.1/entity-defs.schema.yaml",
+        "${schemas}/pack-data.schema.yaml"
+    ],
+    "field_tags": [
+        "json",
+        "yaml"
     ]
 }

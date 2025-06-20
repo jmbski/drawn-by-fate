@@ -1,15 +1,27 @@
 package utils
 
 import (
+	"drawn-by-fate/pkg/logging"
 	"encoding/json"
 	"fmt"
 	"os"
 	"path/filepath"
 	"regexp"
+	"strings"
+
+	"gopkg.in/yaml.v3"
 )
 
+type Unmarshaller = func([]byte, any) error
+
+var unmarshallers map[string]Unmarshaller = map[string]Unmarshaller{
+	".json": json.Unmarshal,
+	".yml":  yaml.Unmarshal,
+	".yaml": yaml.Unmarshal,
+}
+
 // Generic function to read JSON from a file into a given Go struct
-func ReadJSON[T any](path string, objs ...T) (*T, error) {
+func ReadDataFile[T any](path string, objs ...T) (*T, error) {
 	data, err := os.ReadFile(path)
 	if err != nil {
 		return nil, fmt.Errorf("failed to read %s: %w", path, err)
@@ -20,11 +32,37 @@ func ReadJSON[T any](path string, objs ...T) (*T, error) {
 		obj = objs[0]
 	}
 
-	if err := json.Unmarshal(data, &obj); err != nil {
-		return nil, fmt.Errorf("failed to unmarshal JSON from %s: %w", path, err)
+	ext := filepath.Ext(path)
+	unmarshaller, ok := unmarshallers[ext]
+	if !ok {
+		return nil, fmt.Errorf("Invalid data file extension '%s' for file '%s'.", ext, path)
 	}
 
+	if err := unmarshaller(data, &obj); err != nil {
+		return nil, fmt.Errorf("failed to unmarshal %s from %s: %w", ext, path, err)
+	}
+	logging.LogDebug("obj", &obj)
 	return &obj, nil
+}
+
+// ReadYAML reads a YAML file and unmarshals it into the provided target.
+// `target` must be a pointer to the struct you want to load data into.
+func ReadYAML[T any](path string, objs ...T) error {
+	data, err := os.ReadFile(path)
+	if err != nil {
+		return fmt.Errorf("failed to read YAML file %s: %w", path, err)
+	}
+
+	var obj T
+	if len(objs) > 0 {
+		obj = objs[0]
+	}
+
+	if err := yaml.Unmarshal(data, obj); err != nil {
+		return fmt.Errorf("failed to parse YAML file %s: %w", path, err)
+	}
+
+	return nil
 }
 
 // Generic function to write a Go struct as JSON to a file
@@ -131,4 +169,16 @@ func MatchStrPatterns(value string, patterns ...string) (bool, error) {
 		}
 	}
 	return len(patterns) == 0, nil
+}
+
+// IsJson checks if the given path is a yaml file
+func IsJson(path string) bool {
+	ext := strings.ToLower(filepath.Ext(path))
+	return ext == ".json"
+}
+
+// IsYaml checks if the given path is a yaml file
+func IsYaml(path string) bool {
+	ext := strings.ToLower(filepath.Ext(path))
+	return ext == ".yaml" || ext == ".yml"
 }

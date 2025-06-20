@@ -1,0 +1,52 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
+title: Pack Data
+type: object
+description: Meta data for a content package
+properties:
+  name:
+    type: string
+    description: Displayed name of the pack (non-unique)
+  id:
+    type: string
+    description: Unique identifier for the mod (matches pack folder name)
+  app_version:
+    type: string
+    description: Version of the game the pack was designed for. Uses 3-part semantic versioning (<major>.<minor>.<patch>)
+    examples:
+      - "0.0.1"
+  schema_version:
+    type: string
+    description: Version of the config schemas the pack was designed with. Uses 3-part semantic versioning (<major>.<minor>.<patch>)
+    examples:
+      - "0.0.1"
+  pack_version:
+    type: string
+    description: Internal version of the pack. Use 3-part semantic versioning (<major>.<minor>.<patch>)
+    examples:
+      - "0.0.1"
+  load_order:
+    type: integer
+    description: Indicates when the pack should be loaded. Lower = loaded earlier (with core pack at 0). Higher load order will overwrite lower on conflict. Load order will be automatically adjusted based on dependencies
+  dependencies:
+    type: array
+    title: PackDependency
+    description: List of packs that this pack requires in order to work correctly. This pack's load order will be automatically incremented to ensure it's loaded after its dependencies
+    items:
+      type: object
+      description: ID and version of the required pack
+      properties: 
+        pack_id:
+          type: string
+        pack_version:
+          type: string
+      required:
+        - pack_id
+        - pack_version
+required:
+  - name
+  - id
+  - app_version
+  - schema_version
+  - pack_version
+  - load_order
+  - dependencies

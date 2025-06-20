@@ -22,12 +22,12 @@ func (r *GameConfig) Marshal() ([]byte, error) {
 type GameConfig struct {
 	// List of mod ids that have been manually enabled by the user to be loaded into the current                
 	// game context                                                                                             
-	EnabledModIDS                                                                               []string        `json:"enabled_mod_ids"`
+	EnabledModIDS                                                                               []string        `json:"enabled_mod_ids" yaml:"enabled_mod_ids"`
 	// Option to set how the game is rendered on screen (fullscreen, borderless window, or                      
 	// window)                                                                                                  
-	ScreenMode                                                                                  ScreenMode      `json:"screen_mode"`
+	ScreenMode                                                                                  ScreenMode      `json:"screen_mode" yaml:"screen_mode"`
 	// Height/width for the overall screen                                                                      
-	ScreenResolution                                                                            HeightWidthPair `json:"screen_resolution"`
+	ScreenResolution                                                                            HeightWidthPair `json:"screen_resolution" yaml:"screen_resolution"`
 }
 
 // Height/width for the overall screen
@@ -35,8 +35,8 @@ type GameConfig struct {
 // Width and Height pairs for different visual elements such as screen size, screen
 // resolution, etc..
 type HeightWidthPair struct {
-	Height int64 `json:"height"`
-	Width  int64 `json:"width"`
+	Height int64 `json:"height" yaml:"height"`
+	Width  int64 `json:"width" yaml:"width"`
 }
 
 // Option to set how the game is rendered on screen (fullscreen, borderless window, or

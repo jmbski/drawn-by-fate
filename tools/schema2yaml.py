@@ -5,4 +5,5 @@ for root, _, files in os.walk(schemas_path):
     for fname in files:
         if fname.endswith(".json"):
             path = os.path.join(root, fname)
-            os.system(f"j2y {path}")
+            # os.system(f"j2y {path}")
+            os.remove(path)

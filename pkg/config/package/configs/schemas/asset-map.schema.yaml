@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
+title: Data Maps
+description: Mapping of key elements of the game to unique identifiers
+type: object
+properties: 
+  audio:
+    $ref: "#/definitions/Mapping"
+definitions: 
+  Mapping:
+    type: object
+    description: Key-string object that maps ids to asset paths
+    patternProperties: 
+      "[_a-zA-Z][_a-zA-Z0-9]*":
+        type: string

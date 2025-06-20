@@ -24,199 +24,199 @@ func (r *TiledMap) Marshal() ([]byte, error) {
 // Schema for the Tiled Map object.
 type TiledMap struct {
 	// Hex-formatted color (#RRGGBB or #AARRGGBB) (optional)                                                       
-	Backgroundcolor                                                                            *string             `json:"backgroundcolor,omitempty"`
+	Backgroundcolor                                                                            *string             `json:"backgroundcolor,omitempty" yaml:"backgroundcolor,omitempty"`
 	// The class of the map (since 1.9, optional)                                                                  
-	Class                                                                                      *string             `json:"class,omitempty"`
+	Class                                                                                      *string             `json:"class,omitempty" yaml:"class,omitempty"`
 	// The compression level to use for tile layer data (defaults to -1, which means to use the                    
 	// algorithm default)                                                                                          
-	Compressionlevel                                                                           *int64              `json:"compressionlevel,omitempty"`
+	Compressionlevel                                                                           *int64              `json:"compressionlevel,omitempty" yaml:"compressionlevel,omitempty"`
 	// Number of tile rows                                                                                         
-	Height                                                                                     int64               `json:"height"`
+	Height                                                                                     int64               `json:"height" yaml:"height"`
 	// Length of the side of a hex tile in pixels (hexagonal maps only)                                            
-	Hexsidelength                                                                              *int64              `json:"hexsidelength,omitempty"`
+	Hexsidelength                                                                              *int64              `json:"hexsidelength,omitempty" yaml:"hexsidelength,omitempty"`
 	// Whether the map has infinite dimensions                                                                     
-	Infinite                                                                                   *bool               `json:"infinite,omitempty"`
+	Infinite                                                                                   *bool               `json:"infinite,omitempty" yaml:"infinite,omitempty"`
 	// Array of Layers                                                                                             
-	Layers                                                                                     []TiledLayerElement `json:"layers"`
+	Layers                                                                                     []TiledLayerElement `json:"layers" yaml:"layers"`
 	// Auto-increments for each layer                                                                              
-	Nextlayerid                                                                                int64               `json:"nextlayerid"`
+	Nextlayerid                                                                                int64               `json:"nextlayerid" yaml:"nextlayerid"`
 	// Auto-increments for each placed object                                                                      
-	Nextobjectid                                                                               int64               `json:"nextobjectid"`
+	Nextobjectid                                                                               int64               `json:"nextobjectid" yaml:"nextobjectid"`
 	// `orthogonal`, `isometric`, `staggered` or `hexagonal`                                                       
-	Orientation                                                                                TiledMapOrientation `json:"orientation"`
+	Orientation                                                                                TiledMapOrientation `json:"orientation" yaml:"orientation"`
 	// X coordinate of the parallax origin in pixels (since 1.8, default: 0)                                       
-	Parallaxoriginx                                                                            *float64            `json:"parallaxoriginx,omitempty"`
+	Parallaxoriginx                                                                            *float64            `json:"parallaxoriginx,omitempty" yaml:"parallaxoriginx,omitempty"`
 	// Y coordinate of the parallax origin in pixels (since 1.8, default: 0)                                       
-	Parallaxoriginy                                                                            *float64            `json:"parallaxoriginy,omitempty"`
+	Parallaxoriginy                                                                            *float64            `json:"parallaxoriginy,omitempty" yaml:"parallaxoriginy,omitempty"`
 	// Array of Properties                                                                                         
-	Properties                                                                                 []TiledProperty     `json:"properties,omitempty"`
+	Properties                                                                                 []TiledProperty     `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// `right-down` (the default), `right-up`, `left-down` or `left-up` (currently only                            
 	// supported for orthogonal maps)                                                                              
-	Renderorder                                                                                Renderorder         `json:"renderorder"`
+	Renderorder                                                                                Renderorder         `json:"renderorder" yaml:"renderorder"`
 	// `x` or `y` (staggered / hexagonal maps only)                                                                
-	Staggeraxis                                                                                *Staggeraxis        `json:"staggeraxis,omitempty"`
+	Staggeraxis                                                                                *Staggeraxis        `json:"staggeraxis,omitempty" yaml:"staggeraxis,omitempty"`
 	// `odd` or `even` (staggered / hexagonal maps only)                                                           
-	Staggerindex                                                                               *Staggerindex       `json:"staggerindex,omitempty"`
+	Staggerindex                                                                               *Staggerindex       `json:"staggerindex,omitempty" yaml:"staggerindex,omitempty"`
 	// The Tiled version used to save the file                                                                     
-	Tiledversion                                                                               *string             `json:"tiledversion,omitempty"`
+	Tiledversion                                                                               *string             `json:"tiledversion,omitempty" yaml:"tiledversion,omitempty"`
 	// Map grid height                                                                                             
-	Tileheight                                                                                 int64               `json:"tileheight"`
+	Tileheight                                                                                 int64               `json:"tileheight" yaml:"tileheight"`
 	// Array of Tilesets                                                                                           
-	Tilesets                                                                                   []TiledTileset      `json:"tilesets"`
+	Tilesets                                                                                   []TiledTileset      `json:"tilesets" yaml:"tilesets"`
 	// Map grid width                                                                                              
-	Tilewidth                                                                                  int64               `json:"tilewidth"`
+	Tilewidth                                                                                  int64               `json:"tilewidth" yaml:"tilewidth"`
 	// `map` (since 1.0)                                                                                           
-	Type                                                                                       TiledMapType        `json:"type"`
+	Type                                                                                       TiledMapType        `json:"type" yaml:"type"`
 	// The JSON format version (previously a number, saved as string since 1.6)                                    
-	Version                                                                                    string              `json:"version"`
+	Version                                                                                    string              `json:"version" yaml:"version"`
 	// Number of tile columns                                                                                      
-	Width                                                                                      int64               `json:"width"`
+	Width                                                                                      int64               `json:"width" yaml:"width"`
 }
 
 // Schema for a Tiled Layer, which can be polymorphic based on its 'type' field.
 type TiledLayerElement struct {
 	// The class of the layer (since 1.9, optional)                                                                
-	Class                                                                                    *string               `json:"class,omitempty"`
+	Class                                                                                    *string               `json:"class,omitempty" yaml:"class,omitempty"`
 	// Incremental ID - unique across all layers                                                                   
-	ID                                                                                       int64                 `json:"id"`
+	ID                                                                                       int64                 `json:"id" yaml:"id"`
 	// Whether layer is locked in the editor (default: false). (since 1.8.2)                                       
-	Locked                                                                                   *bool                 `json:"locked,omitempty"`
+	Locked                                                                                   *bool                 `json:"locked,omitempty" yaml:"locked,omitempty"`
 	// Name assigned to this layer                                                                                 
-	Name                                                                                     string                `json:"name"`
+	Name                                                                                     string                `json:"name" yaml:"name"`
 	// Horizontal layer offset in pixels (default: 0)                                                              
-	Offsetx                                                                                  *float64              `json:"offsetx,omitempty"`
+	Offsetx                                                                                  *float64              `json:"offsetx,omitempty" yaml:"offsetx,omitempty"`
 	// Vertical layer offset in pixels (default: 0)                                                                
-	Offsety                                                                                  *float64              `json:"offsety,omitempty"`
+	Offsety                                                                                  *float64              `json:"offsety,omitempty" yaml:"offsety,omitempty"`
 	// Value between 0 and 1                                                                                       
-	Opacity                                                                                  float64               `json:"opacity"`
+	Opacity                                                                                  float64               `json:"opacity" yaml:"opacity"`
 	// Horizontal parallax factor for this layer (default: 1). (since 1.5)                                         
-	Parallaxx                                                                                *float64              `json:"parallaxx,omitempty"`
+	Parallaxx                                                                                *float64              `json:"parallaxx,omitempty" yaml:"parallaxx,omitempty"`
 	// Vertical parallax factor for this layer (default: 1). (since 1.5)                                           
-	Parallaxy                                                                                *float64              `json:"parallaxy,omitempty"`
+	Parallaxy                                                                                *float64              `json:"parallaxy,omitempty" yaml:"parallaxy,omitempty"`
 	// Array of Properties                                                                                         
-	Properties                                                                               []TiledProperty       `json:"properties,omitempty"`
+	Properties                                                                               []TiledProperty       `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Hex-formatted tint color (#RRGGBB or #AARRGGBB) that is multiplied with any graphics                        
 	// drawn by this layer or any child layers (optional).                                                         
-	Tintcolor                                                                                *string               `json:"tintcolor,omitempty"`
+	Tintcolor                                                                                *string               `json:"tintcolor,omitempty" yaml:"tintcolor,omitempty"`
 	// `tilelayer`, `objectgroup`, `imagelayer` or `group`                                                         
-	Type                                                                                     PurpleType            `json:"type"`
+	Type                                                                                     PurpleType            `json:"type" yaml:"type"`
 	// Whether layer is shown or hidden in editor                                                                  
-	Visible                                                                                  bool                  `json:"visible"`
+	Visible                                                                                  bool                  `json:"visible" yaml:"visible"`
 	// Horizontal layer offset in tiles. Always 0.                                                                 
-	X                                                                                        int64                 `json:"x"`
+	X                                                                                        int64                 `json:"x" yaml:"x"`
 	// Vertical layer offset in tiles. Always 0.                                                                   
-	Y                                                                                        int64                 `json:"y"`
+	Y                                                                                        int64                 `json:"y" yaml:"y"`
 	// Array of chunks (optional). `tilelayer` only.                                                               
-	Chunks                                                                                   []TiledTileLayerChunk `json:"chunks,omitempty"`
+	Chunks                                                                                   []TiledTileLayerChunk `json:"chunks,omitempty" yaml:"chunks,omitempty"`
 	// `zlib`, `gzip`, `zstd` (since 1.3) or empty (default). `tilelayer` only.                                    
-	Compression                                                                              *Compression          `json:"compression,omitempty"`
+	Compression                                                                              *Compression          `json:"compression,omitempty" yaml:"compression,omitempty"`
 	// Array of `unsigned int` (GIDs) or base64-encoded data. `tilelayer` only.                                    
-	Data                                                                                     *Data                 `json:"data"`
+	Data                                                                                     *Data                 `json:"data" yaml:"data"`
 	// `csv` (default) or `base64`. `tilelayer` only.                                                              
-	Encoding                                                                                 *Encoding             `json:"encoding,omitempty"`
+	Encoding                                                                                 *Encoding             `json:"encoding,omitempty" yaml:"encoding,omitempty"`
 	// Row count. Same as map height for fixed-size maps. `tilelayer` only.                                        
-	Height                                                                                   *int64                `json:"height,omitempty"`
+	Height                                                                                   *int64                `json:"height,omitempty" yaml:"height,omitempty"`
 	// X coordinate where layer content starts (for infinite maps)                                                 
-	Startx                                                                                   *int64                `json:"startx,omitempty"`
+	Startx                                                                                   *int64                `json:"startx,omitempty" yaml:"startx,omitempty"`
 	// Y coordinate where layer content starts (for infinite maps)                                                 
-	Starty                                                                                   *int64                `json:"starty,omitempty"`
+	Starty                                                                                   *int64                `json:"starty,omitempty" yaml:"starty,omitempty"`
 	// Column count. Same as map width for fixed-size maps. `tilelayer` only.                                      
-	Width                                                                                    *int64                `json:"width,omitempty"`
+	Width                                                                                    *int64                `json:"width,omitempty" yaml:"width,omitempty"`
 	// `topdown` (default) or `index`. `objectgroup` only.                                                         
-	Draworder                                                                                *Draworder            `json:"draworder,omitempty"`
+	Draworder                                                                                *Draworder            `json:"draworder,omitempty" yaml:"draworder,omitempty"`
 	// Array of objects. `objectgroup` only.                                                                       
-	Objects                                                                                  []TiledObject         `json:"objects,omitempty"`
+	Objects                                                                                  []TiledObject         `json:"objects,omitempty" yaml:"objects,omitempty"`
 	// Image used by this layer. `imagelayer` only.                                                                
-	Image                                                                                    *string               `json:"image,omitempty"`
+	Image                                                                                    *string               `json:"image,omitempty" yaml:"image,omitempty"`
 	// Height of the image used by this layer. `imagelayer` only. (since 1.11.1)                                   
-	Imageheight                                                                              *int64                `json:"imageheight,omitempty"`
+	Imageheight                                                                              *int64                `json:"imageheight,omitempty" yaml:"imageheight,omitempty"`
 	// Width of the image used by this layer. `imagelayer` only. (since 1.11.1)                                    
-	Imagewidth                                                                               *int64                `json:"imagewidth,omitempty"`
+	Imagewidth                                                                               *int64                `json:"imagewidth,omitempty" yaml:"imagewidth,omitempty"`
 	// Whether the image drawn by this layer is repeated along the X axis. `imagelayer` only.                      
 	// (since 1.8)                                                                                                 
-	Repeatx                                                                                  *bool                 `json:"repeatx,omitempty"`
+	Repeatx                                                                                  *bool                 `json:"repeatx,omitempty" yaml:"repeatx,omitempty"`
 	// Whether the image drawn by this layer is repeated along the Y axis. `imagelayer` only.                      
 	// (since 1.8)                                                                                                 
-	Repeaty                                                                                  *bool                 `json:"repeaty,omitempty"`
+	Repeaty                                                                                  *bool                 `json:"repeaty,omitempty" yaml:"repeaty,omitempty"`
 	// Hex-formatted color (#RRGGBB) (optional). `imagelayer` only.                                                
-	Transparentcolor                                                                         *string               `json:"transparentcolor,omitempty"`
+	Transparentcolor                                                                         *string               `json:"transparentcolor,omitempty" yaml:"transparentcolor,omitempty"`
 	// Array of layers. `group` only.                                                                              
-	Layers                                                                                   []TiledLayerElement   `json:"layers,omitempty"`
+	Layers                                                                                   []TiledLayerElement   `json:"layers,omitempty" yaml:"layers,omitempty"`
 }
 
 // Schema for a chunk of tile data in an infinite map. (Inferred from common patterns, not
 // explicitly detailed in documentation snippets)
 type TiledTileLayerChunk struct {
 	// Array of GIDs for the chunk                    
-	Data                                      []int64 `json:"data"`
+	Data                                      []int64 `json:"data" yaml:"data"`
 	// Row count of the chunk                         
-	Height                                    int64   `json:"height"`
+	Height                                    int64   `json:"height" yaml:"height"`
 	// Column count of the chunk                      
-	Width                                     int64   `json:"width"`
+	Width                                     int64   `json:"width" yaml:"width"`
 	// X coordinate where chunk content starts        
-	X                                         int64   `json:"x"`
+	X                                         int64   `json:"x" yaml:"x"`
 	// Y coordinate where chunk content starts        
-	Y                                         int64   `json:"y"`
+	Y                                         int64   `json:"y" yaml:"y"`
 }
 
 // Schema for an Object on an object layer.
 type TiledObject struct {
 	// Used to mark an object as an ellipse                                                
-	Ellipse                                                               *bool            `json:"ellipse,omitempty"`
+	Ellipse                                                               *bool            `json:"ellipse,omitempty" yaml:"ellipse,omitempty"`
 	// Global tile ID, only if object represents a tile                                    
-	Gid                                                                   *int64           `json:"gid,omitempty"`
+	Gid                                                                   *int64           `json:"gid,omitempty" yaml:"gid,omitempty"`
 	// Height in pixels.                                                                   
-	Height                                                                float64          `json:"height"`
+	Height                                                                float64          `json:"height" yaml:"height"`
 	// Incremental ID, unique across all objects                                           
-	ID                                                                    int64            `json:"id"`
+	ID                                                                    int64            `json:"id" yaml:"id"`
 	// String assigned to name field in editor                                             
-	Name                                                                  string           `json:"name"`
+	Name                                                                  string           `json:"name" yaml:"name"`
 	// Used to mark an object as a point                                                   
-	Point                                                                 *bool            `json:"point,omitempty"`
+	Point                                                                 *bool            `json:"point,omitempty" yaml:"point,omitempty"`
 	// Array of Points, in case the object is a polygon                                    
-	Polygon                                                               []TiledPoint     `json:"polygon,omitempty"`
+	Polygon                                                               []TiledPoint     `json:"polygon,omitempty" yaml:"polygon,omitempty"`
 	// Array of Points, in case the object is a polyline                                   
-	Polyline                                                              []TiledPoint     `json:"polyline,omitempty"`
+	Polyline                                                              []TiledPoint     `json:"polyline,omitempty" yaml:"polyline,omitempty"`
 	// Array of Properties                                                                 
-	Properties                                                            []TiledProperty  `json:"properties,omitempty"`
+	Properties                                                            []TiledProperty  `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Angle in degrees clockwise                                                          
-	Rotation                                                              *float64         `json:"rotation,omitempty"`
+	Rotation                                                              *float64         `json:"rotation,omitempty" yaml:"rotation,omitempty"`
 	// Reference to a template file, in case object is a template instance                 
-	Template                                                              *string          `json:"template,omitempty"`
+	Template                                                              *string          `json:"template,omitempty" yaml:"template,omitempty"`
 	// Only used for text objects                                                          
-	Text                                                                  *TiledTextObject `json:"text,omitempty"`
+	Text                                                                  *TiledTextObject `json:"text,omitempty" yaml:"text,omitempty"`
 	// The class of the object (was saved as `class` in 1.9, optional)                     
-	Type                                                                  *string          `json:"type,omitempty"`
+	Type                                                                  *string          `json:"type,omitempty" yaml:"type,omitempty"`
 	// Whether object is shown in editor.                                                  
-	Visible                                                               bool             `json:"visible"`
+	Visible                                                               bool             `json:"visible" yaml:"visible"`
 	// Width in pixels.                                                                    
-	Width                                                                 float64          `json:"width"`
+	Width                                                                 float64          `json:"width" yaml:"width"`
 	// X coordinate in pixels                                                              
-	X                                                                     float64          `json:"x"`
+	X                                                                     float64          `json:"x" yaml:"x"`
 	// Y coordinate in pixels                                                              
-	Y                                                                     float64          `json:"y"`
+	Y                                                                     float64          `json:"y" yaml:"y"`
 }
 
 // Schema for a 2D coordinate point (inferred from common conventions).
 type TiledPoint struct {
 	// X coordinate        
-	X              float64 `json:"x"`
+	X              float64 `json:"x" yaml:"x"`
 	// Y coordinate        
-	Y              float64 `json:"y"`
+	Y              float64 `json:"y" yaml:"y"`
 }
 
 // Schema for a custom Property.
 type TiledProperty struct {
 	// Name of the property                                                                                       
-	Name                                                                                        string            `json:"name"`
+	Name                                                                                        string            `json:"name" yaml:"name"`
 	// Name of the custom property type, when applicable (since 1.8)                                              
-	Propertytype                                                                                *string           `json:"propertytype,omitempty"`
+	Propertytype                                                                                *string           `json:"propertytype,omitempty" yaml:"propertytype,omitempty"`
 	// Type of the property (`string` (default), `int`, `float`, `bool`, `color`, `file`,                         
 	// `object` or `class` (since 0.16, with `color` and `file` added in 0.17, `object` added in                  
 	// 1.4 and `class` added in 1.8))                                                                             
-	Type                                                                                        TiledPropertyType `json:"type"`
+	Type                                                                                        TiledPropertyType `json:"type" yaml:"type"`
 	// Value of the property                                                                                      
-	Value                                                                                       *Value            `json:"value"`
+	Value                                                                                       *Value            `json:"value" yaml:"value"`
 }
 
 // Only used for text objects
@@ -224,92 +224,92 @@ type TiledProperty struct {
 // Schema for a Text object within Tiled.
 type TiledTextObject struct {
 	// Whether to use a bold font (default: `false`)                                  
-	Bold                                                                      *bool   `json:"bold,omitempty"`
+	Bold                                                                      *bool   `json:"bold,omitempty" yaml:"bold,omitempty"`
 	// Hex-formatted color (#RRGGBB or #AARRGGBB) (default: `#000000`)                
-	Color                                                                     *string `json:"color,omitempty"`
+	Color                                                                     *string `json:"color,omitempty" yaml:"color,omitempty"`
 	// Font family (default: `sans-serif`)                                            
-	Fontfamily                                                                *string `json:"fontfamily,omitempty"`
+	Fontfamily                                                                *string `json:"fontfamily,omitempty" yaml:"fontfamily,omitempty"`
 	// Horizontal alignment (`center`, `right`, `justify` or `left` (default))        
-	Halign                                                                    *Halign `json:"halign,omitempty"`
+	Halign                                                                    *Halign `json:"halign,omitempty" yaml:"halign,omitempty"`
 	// Whether to use an italic font (default: `false`)                               
-	Italic                                                                    *bool   `json:"italic,omitempty"`
+	Italic                                                                    *bool   `json:"italic,omitempty" yaml:"italic,omitempty"`
 	// Whether to use kerning when placing characters (default: `true`)               
-	Kerning                                                                   *bool   `json:"kerning,omitempty"`
+	Kerning                                                                   *bool   `json:"kerning,omitempty" yaml:"kerning,omitempty"`
 	// Pixel size of font (default: 16)                                               
-	Pixelsize                                                                 *int64  `json:"pixelsize,omitempty"`
+	Pixelsize                                                                 *int64  `json:"pixelsize,omitempty" yaml:"pixelsize,omitempty"`
 	// Whether to strike out the text (default: `false`)                              
-	Strikeout                                                                 *bool   `json:"strikeout,omitempty"`
+	Strikeout                                                                 *bool   `json:"strikeout,omitempty" yaml:"strikeout,omitempty"`
 	// Text                                                                           
-	Text                                                                      string  `json:"text"`
+	Text                                                                      string  `json:"text" yaml:"text"`
 	// Whether to underline the text (default: `false`)                               
-	Underline                                                                 *bool   `json:"underline,omitempty"`
+	Underline                                                                 *bool   `json:"underline,omitempty" yaml:"underline,omitempty"`
 	// Vertical alignment (`center`, `bottom` or `top` (default))                     
-	Valign                                                                    *Valign `json:"valign,omitempty"`
+	Valign                                                                    *Valign `json:"valign,omitempty" yaml:"valign,omitempty"`
 	// Whether the text is wrapped within the object bounds (default: `false`)        
-	Wrap                                                                      *bool   `json:"wrap,omitempty"`
+	Wrap                                                                      *bool   `json:"wrap,omitempty" yaml:"wrap,omitempty"`
 }
 
 // Schema for a Tiled Tileset.
 type TiledTileset struct {
 	// Hex-formatted color (#RRGGBB or #AARRGGBB) (optional)                                                                 
-	Backgroundcolor                                                                             *string                      `json:"backgroundcolor,omitempty"`
+	Backgroundcolor                                                                             *string                      `json:"backgroundcolor,omitempty" yaml:"backgroundcolor,omitempty"`
 	// The class of the tileset (since 1.9, optional)                                                                        
-	Class                                                                                       *string                      `json:"class,omitempty"`
+	Class                                                                                       *string                      `json:"class,omitempty" yaml:"class,omitempty"`
 	// The number of tile columns in the tileset                                                                             
-	Columns                                                                                     int64                        `json:"columns"`
+	Columns                                                                                     int64                        `json:"columns" yaml:"columns"`
 	// The fill mode to use when rendering tiles from this tileset (`stretch` (default) or                                   
 	// `preserve-aspect-fit`) (since 1.9)                                                                                    
-	Fillmode                                                                                    *Fillmode                    `json:"fillmode,omitempty"`
+	Fillmode                                                                                    *Fillmode                    `json:"fillmode,omitempty" yaml:"fillmode,omitempty"`
 	// GID corresponding to the first tile in the set                                                                        
-	Firstgid                                                                                    int64                        `json:"firstgid"`
+	Firstgid                                                                                    int64                        `json:"firstgid" yaml:"firstgid"`
 	// (optional)                                                                                                            
-	Grid                                                                                        *TiledTilesetGrid            `json:"grid,omitempty"`
+	Grid                                                                                        *TiledTilesetGrid            `json:"grid,omitempty" yaml:"grid,omitempty"`
 	// Image used for tiles in this set                                                                                      
-	Image                                                                                       *string                      `json:"image,omitempty"`
+	Image                                                                                       *string                      `json:"image,omitempty" yaml:"image,omitempty"`
 	// Height of source image in pixels                                                                                      
-	Imageheight                                                                                 *int64                       `json:"imageheight,omitempty"`
+	Imageheight                                                                                 *int64                       `json:"imageheight,omitempty" yaml:"imageheight,omitempty"`
 	// Width of source image in pixels                                                                                       
-	Imagewidth                                                                                  *int64                       `json:"imagewidth,omitempty"`
+	Imagewidth                                                                                  *int64                       `json:"imagewidth,omitempty" yaml:"imagewidth,omitempty"`
 	// Buffer between image edge and first tile (pixels)                                                                     
-	Margin                                                                                      *int64                       `json:"margin,omitempty"`
+	Margin                                                                                      *int64                       `json:"margin,omitempty" yaml:"margin,omitempty"`
 	// Name given to this tileset                                                                                            
-	Name                                                                                        string                       `json:"name"`
+	Name                                                                                        string                       `json:"name" yaml:"name"`
 	// Alignment to use for tile objects (`unspecified` (default), `topleft`, `top`, `topright`,                             
 	// `left`, `center`, `right`, `bottomleft`, `bottom` or `bottomright`) (since 1.4)                                       
-	Objectalignment                                                                             *Objectalignment             `json:"objectalignment,omitempty"`
+	Objectalignment                                                                             *Objectalignment             `json:"objectalignment,omitempty" yaml:"objectalignment,omitempty"`
 	// Array of Properties                                                                                                   
-	Properties                                                                                  []TiledProperty              `json:"properties,omitempty"`
+	Properties                                                                                  []TiledProperty              `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// The external file that contains this tilesets data                                                                    
-	Source                                                                                      *string                      `json:"source,omitempty"`
+	Source                                                                                      *string                      `json:"source,omitempty" yaml:"source,omitempty"`
 	// Spacing between adjacent tiles in image (pixels)                                                                      
-	Spacing                                                                                     *int64                       `json:"spacing,omitempty"`
+	Spacing                                                                                     *int64                       `json:"spacing,omitempty" yaml:"spacing,omitempty"`
 	// Array of Terrains (optional)                                                                                          
-	Terrains                                                                                    []TiledTerrain               `json:"terrains,omitempty"`
+	Terrains                                                                                    []TiledTerrain               `json:"terrains,omitempty" yaml:"terrains,omitempty"`
 	// The number of tiles in this tileset                                                                                   
-	Tilecount                                                                                   int64                        `json:"tilecount"`
+	Tilecount                                                                                   int64                        `json:"tilecount" yaml:"tilecount"`
 	// The Tiled version used to save the file                                                                               
-	Tiledversion                                                                                *string                      `json:"tiledversion,omitempty"`
+	Tiledversion                                                                                *string                      `json:"tiledversion,omitempty" yaml:"tiledversion,omitempty"`
 	// Maximum height of tiles in this set                                                                                   
-	Tileheight                                                                                  int64                        `json:"tileheight"`
+	Tileheight                                                                                  int64                        `json:"tileheight" yaml:"tileheight"`
 	// (optional)                                                                                                            
-	Tileoffset                                                                                  *TiledTileOffset             `json:"tileoffset,omitempty"`
+	Tileoffset                                                                                  *TiledTileOffset             `json:"tileoffset,omitempty" yaml:"tileoffset,omitempty"`
 	// The size to use when rendering tiles from this tileset on a tile layer (`tile` (default)                              
 	// or `grid`) (since 1.9)                                                                                                
-	Tilerendersize                                                                              *Tilerendersize              `json:"tilerendersize,omitempty"`
+	Tilerendersize                                                                              *Tilerendersize              `json:"tilerendersize,omitempty" yaml:"tilerendersize,omitempty"`
 	// Array of Tiles (optional)                                                                                             
-	Tiles                                                                                       []TiledTileDefinition        `json:"tiles,omitempty"`
+	Tiles                                                                                       []TiledTileDefinition        `json:"tiles,omitempty" yaml:"tiles,omitempty"`
 	// Maximum width of tiles in this set                                                                                    
-	Tilewidth                                                                                   int64                        `json:"tilewidth"`
+	Tilewidth                                                                                   int64                        `json:"tilewidth" yaml:"tilewidth"`
 	// Allowed transformations (optional)                                                                                    
-	Transformations                                                                             *TiledTilesetTransformations `json:"transformations,omitempty"`
+	Transformations                                                                             *TiledTilesetTransformations `json:"transformations,omitempty" yaml:"transformations,omitempty"`
 	// Hex-formatted color (#RRGGBB) (optional)                                                                              
-	Transparentcolor                                                                            *string                      `json:"transparentcolor,omitempty"`
+	Transparentcolor                                                                            *string                      `json:"transparentcolor,omitempty" yaml:"transparentcolor,omitempty"`
 	// `tileset` (for tileset files, since 1.0)                                                                              
-	Type                                                                                        TilesetType                  `json:"type"`
+	Type                                                                                        TilesetType                  `json:"type" yaml:"type"`
 	// The JSON format version (previously a number, saved as string since 1.6)                                              
-	Version                                                                                     string                       `json:"version"`
+	Version                                                                                     string                       `json:"version" yaml:"version"`
 	// Array of Wang sets (since 1.1.5)                                                                                      
-	Wangsets                                                                                    []TiledWangSet               `json:"wangsets,omitempty"`
+	Wangsets                                                                                    []TiledWangSet               `json:"wangsets,omitempty" yaml:"wangsets,omitempty"`
 }
 
 // (optional)
@@ -317,21 +317,21 @@ type TiledTileset struct {
 // Schema for common grid settings for tiles within a tileset.
 type TiledTilesetGrid struct {
 	// Cell height of tile grid                             
-	Height                                  int64           `json:"height"`
+	Height                                  int64           `json:"height" yaml:"height"`
 	// `orthogonal` (default) or `isometric`                
-	Orientation                             GridOrientation `json:"orientation"`
+	Orientation                             GridOrientation `json:"orientation" yaml:"orientation"`
 	// Cell width of tile grid                              
-	Width                                   int64           `json:"width"`
+	Width                                   int64           `json:"width" yaml:"width"`
 }
 
 // Schema for a terrain type within a tileset.
 type TiledTerrain struct {
 	// Name of terrain                                      
-	Name                                    string          `json:"name"`
+	Name                                    string          `json:"name" yaml:"name"`
 	// Array of Properties                                  
-	Properties                              []TiledProperty `json:"properties,omitempty"`
+	Properties                              []TiledProperty `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Local ID of tile representing terrain                
-	Tile                                    int64           `json:"tile"`
+	Tile                                    int64           `json:"tile" yaml:"tile"`
 }
 
 // (optional)
@@ -339,49 +339,49 @@ type TiledTerrain struct {
 // Schema for an offset in pixels for drawing tiles from a tileset.
 type TiledTileOffset struct {
 	// Horizontal offset in pixels                       
-	X                                              int64 `json:"x"`
+	X                                              int64 `json:"x" yaml:"x"`
 	// Vertical offset in pixels (positive is down)      
-	Y                                              int64 `json:"y"`
+	Y                                              int64 `json:"y" yaml:"y"`
 }
 
 // Schema for an individual Tile within a Tileset.
 type TiledTileDefinition struct {
 	// Array of Frames for tile animation                                                                             
-	Animation                                                                                   []TiledAnimationFrame `json:"animation,omitempty"`
+	Animation                                                                                   []TiledAnimationFrame `json:"animation,omitempty" yaml:"animation,omitempty"`
 	// The height of the sub-rectangle representing this tile (defaults to the image height)                          
-	Height                                                                                      *int64                `json:"height,omitempty"`
+	Height                                                                                      *int64                `json:"height,omitempty" yaml:"height,omitempty"`
 	// Local ID of the tile                                                                                           
-	ID                                                                                          int64                 `json:"id"`
+	ID                                                                                          int64                 `json:"id" yaml:"id"`
 	// Image representing this tile (optional, used for image collection tilesets)                                    
-	Image                                                                                       *string               `json:"image,omitempty"`
+	Image                                                                                       *string               `json:"image,omitempty" yaml:"image,omitempty"`
 	// Height of the tile image in pixels                                                                             
-	Imageheight                                                                                 *int64                `json:"imageheight,omitempty"`
+	Imageheight                                                                                 *int64                `json:"imageheight,omitempty" yaml:"imageheight,omitempty"`
 	// Width of the tile image in pixels                                                                              
-	Imagewidth                                                                                  *int64                `json:"imagewidth,omitempty"`
+	Imagewidth                                                                                  *int64                `json:"imagewidth,omitempty" yaml:"imagewidth,omitempty"`
 	// Layer with type `objectgroup`, when collision shapes are specified (optional)                                  
-	Objectgroup                                                                                 *TileTiledLayer       `json:"objectgroup,omitempty"`
+	Objectgroup                                                                                 *TileTiledLayer       `json:"objectgroup,omitempty" yaml:"objectgroup,omitempty"`
 	// Percentage chance this tile is chosen when competing with others in the editor (optional)                      
-	Probability                                                                                 *float64              `json:"probability,omitempty"`
+	Probability                                                                                 *float64              `json:"probability,omitempty" yaml:"probability,omitempty"`
 	// Array of Properties                                                                                            
-	Properties                                                                                  []TiledProperty       `json:"properties,omitempty"`
+	Properties                                                                                  []TiledProperty       `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Index of terrain for each corner of tile (optional, replaced by Wang sets since 1.5)                           
-	Terrain                                                                                     []int64               `json:"terrain,omitempty"`
+	Terrain                                                                                     []int64               `json:"terrain,omitempty" yaml:"terrain,omitempty"`
 	// The class of the tile (was saved as `class` in 1.9, optional)                                                  
-	Type                                                                                        *string               `json:"type,omitempty"`
+	Type                                                                                        *string               `json:"type,omitempty" yaml:"type,omitempty"`
 	// The width of the sub-rectangle representing this tile (defaults to the image width)                            
-	Width                                                                                       *int64                `json:"width,omitempty"`
+	Width                                                                                       *int64                `json:"width,omitempty" yaml:"width,omitempty"`
 	// The X position of the sub-rectangle representing this tile (default: 0)                                        
-	X                                                                                           *int64                `json:"x,omitempty"`
+	X                                                                                           *int64                `json:"x,omitempty" yaml:"x,omitempty"`
 	// The Y position of the sub-rectangle representing this tile (default: 0)                                        
-	Y                                                                                           *int64                `json:"y,omitempty"`
+	Y                                                                                           *int64                `json:"y,omitempty" yaml:"y,omitempty"`
 }
 
 // Schema for a single frame in a tile animation.
 type TiledAnimationFrame struct {
 	// Frame duration in milliseconds             
-	Duration                                int64 `json:"duration"`
+	Duration                                int64 `json:"duration" yaml:"duration"`
 	// Local tile ID representing this frame      
-	Tileid                                  int64 `json:"tileid"`
+	Tileid                                  int64 `json:"tileid" yaml:"tileid"`
 }
 
 // Layer with type `objectgroup`, when collision shapes are specified (optional)
@@ -389,72 +389,72 @@ type TiledAnimationFrame struct {
 // Schema for a Tiled Layer, which can be polymorphic based on its 'type' field.
 type TileTiledLayer struct {
 	// `tilelayer`, `objectgroup`, `imagelayer` or `group`                                                         
-	Type                                                                                     FluffyType            `json:"type"`
+	Type                                                                                     FluffyType            `json:"type" yaml:"type"`
 	// The class of the layer (since 1.9, optional)                                                                
-	Class                                                                                    *string               `json:"class,omitempty"`
+	Class                                                                                    *string               `json:"class,omitempty" yaml:"class,omitempty"`
 	// Incremental ID - unique across all layers                                                                   
-	ID                                                                                       int64                 `json:"id"`
+	ID                                                                                       int64                 `json:"id" yaml:"id"`
 	// Whether layer is locked in the editor (default: false). (since 1.8.2)                                       
-	Locked                                                                                   *bool                 `json:"locked,omitempty"`
+	Locked                                                                                   *bool                 `json:"locked,omitempty" yaml:"locked,omitempty"`
 	// Name assigned to this layer                                                                                 
-	Name                                                                                     string                `json:"name"`
+	Name                                                                                     string                `json:"name" yaml:"name"`
 	// Horizontal layer offset in pixels (default: 0)                                                              
-	Offsetx                                                                                  *float64              `json:"offsetx,omitempty"`
+	Offsetx                                                                                  *float64              `json:"offsetx,omitempty" yaml:"offsetx,omitempty"`
 	// Vertical layer offset in pixels (default: 0)                                                                
-	Offsety                                                                                  *float64              `json:"offsety,omitempty"`
+	Offsety                                                                                  *float64              `json:"offsety,omitempty" yaml:"offsety,omitempty"`
 	// Value between 0 and 1                                                                                       
-	Opacity                                                                                  float64               `json:"opacity"`
+	Opacity                                                                                  float64               `json:"opacity" yaml:"opacity"`
 	// Horizontal parallax factor for this layer (default: 1). (since 1.5)                                         
-	Parallaxx                                                                                *float64              `json:"parallaxx,omitempty"`
+	Parallaxx                                                                                *float64              `json:"parallaxx,omitempty" yaml:"parallaxx,omitempty"`
 	// Vertical parallax factor for this layer (default: 1). (since 1.5)                                           
-	Parallaxy                                                                                *float64              `json:"parallaxy,omitempty"`
+	Parallaxy                                                                                *float64              `json:"parallaxy,omitempty" yaml:"parallaxy,omitempty"`
 	// Array of Properties                                                                                         
-	Properties                                                                               []TiledProperty       `json:"properties,omitempty"`
+	Properties                                                                               []TiledProperty       `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Hex-formatted tint color (#RRGGBB or #AARRGGBB) that is multiplied with any graphics                        
 	// drawn by this layer or any child layers (optional).                                                         
-	Tintcolor                                                                                *string               `json:"tintcolor,omitempty"`
+	Tintcolor                                                                                *string               `json:"tintcolor,omitempty" yaml:"tintcolor,omitempty"`
 	// Whether layer is shown or hidden in editor                                                                  
-	Visible                                                                                  bool                  `json:"visible"`
+	Visible                                                                                  bool                  `json:"visible" yaml:"visible"`
 	// Horizontal layer offset in tiles. Always 0.                                                                 
-	X                                                                                        int64                 `json:"x"`
+	X                                                                                        int64                 `json:"x" yaml:"x"`
 	// Vertical layer offset in tiles. Always 0.                                                                   
-	Y                                                                                        int64                 `json:"y"`
+	Y                                                                                        int64                 `json:"y" yaml:"y"`
 	// Array of chunks (optional). `tilelayer` only.                                                               
-	Chunks                                                                                   []TiledTileLayerChunk `json:"chunks,omitempty"`
+	Chunks                                                                                   []TiledTileLayerChunk `json:"chunks,omitempty" yaml:"chunks,omitempty"`
 	// `zlib`, `gzip`, `zstd` (since 1.3) or empty (default). `tilelayer` only.                                    
-	Compression                                                                              *Compression          `json:"compression,omitempty"`
+	Compression                                                                              *Compression          `json:"compression,omitempty" yaml:"compression,omitempty"`
 	// Array of `unsigned int` (GIDs) or base64-encoded data. `tilelayer` only.                                    
-	Data                                                                                     *Data                 `json:"data"`
+	Data                                                                                     *Data                 `json:"data" yaml:"data"`
 	// `csv` (default) or `base64`. `tilelayer` only.                                                              
-	Encoding                                                                                 *Encoding             `json:"encoding,omitempty"`
+	Encoding                                                                                 *Encoding             `json:"encoding,omitempty" yaml:"encoding,omitempty"`
 	// Row count. Same as map height for fixed-size maps. `tilelayer` only.                                        
-	Height                                                                                   *int64                `json:"height,omitempty"`
+	Height                                                                                   *int64                `json:"height,omitempty" yaml:"height,omitempty"`
 	// X coordinate where layer content starts (for infinite maps)                                                 
-	Startx                                                                                   *int64                `json:"startx,omitempty"`
+	Startx                                                                                   *int64                `json:"startx,omitempty" yaml:"startx,omitempty"`
 	// Y coordinate where layer content starts (for infinite maps)                                                 
-	Starty                                                                                   *int64                `json:"starty,omitempty"`
+	Starty                                                                                   *int64                `json:"starty,omitempty" yaml:"starty,omitempty"`
 	// Column count. Same as map width for fixed-size maps. `tilelayer` only.                                      
-	Width                                                                                    *int64                `json:"width,omitempty"`
+	Width                                                                                    *int64                `json:"width,omitempty" yaml:"width,omitempty"`
 	// `topdown` (default) or `index`. `objectgroup` only.                                                         
-	Draworder                                                                                *Draworder            `json:"draworder,omitempty"`
+	Draworder                                                                                *Draworder            `json:"draworder,omitempty" yaml:"draworder,omitempty"`
 	// Array of objects. `objectgroup` only.                                                                       
-	Objects                                                                                  []TiledObject         `json:"objects,omitempty"`
+	Objects                                                                                  []TiledObject         `json:"objects,omitempty" yaml:"objects,omitempty"`
 	// Image used by this layer. `imagelayer` only.                                                                
-	Image                                                                                    *string               `json:"image,omitempty"`
+	Image                                                                                    *string               `json:"image,omitempty" yaml:"image,omitempty"`
 	// Height of the image used by this layer. `imagelayer` only. (since 1.11.1)                                   
-	Imageheight                                                                              *int64                `json:"imageheight,omitempty"`
+	Imageheight                                                                              *int64                `json:"imageheight,omitempty" yaml:"imageheight,omitempty"`
 	// Width of the image used by this layer. `imagelayer` only. (since 1.11.1)                                    
-	Imagewidth                                                                               *int64                `json:"imagewidth,omitempty"`
+	Imagewidth                                                                               *int64                `json:"imagewidth,omitempty" yaml:"imagewidth,omitempty"`
 	// Whether the image drawn by this layer is repeated along the X axis. `imagelayer` only.                      
 	// (since 1.8)                                                                                                 
-	Repeatx                                                                                  *bool                 `json:"repeatx,omitempty"`
+	Repeatx                                                                                  *bool                 `json:"repeatx,omitempty" yaml:"repeatx,omitempty"`
 	// Whether the image drawn by this layer is repeated along the Y axis. `imagelayer` only.                      
 	// (since 1.8)                                                                                                 
-	Repeaty                                                                                  *bool                 `json:"repeaty,omitempty"`
+	Repeaty                                                                                  *bool                 `json:"repeaty,omitempty" yaml:"repeaty,omitempty"`
 	// Hex-formatted color (#RRGGBB) (optional). `imagelayer` only.                                                
-	Transparentcolor                                                                         *string               `json:"transparentcolor,omitempty"`
+	Transparentcolor                                                                         *string               `json:"transparentcolor,omitempty" yaml:"transparentcolor,omitempty"`
 	// Array of layers. `group` only.                                                                              
-	Layers                                                                                   []TiledLayerElement   `json:"layers,omitempty"`
+	Layers                                                                                   []TiledLayerElement   `json:"layers,omitempty" yaml:"layers,omitempty"`
 }
 
 // Allowed transformations (optional)
@@ -462,56 +462,56 @@ type TileTiledLayer struct {
 // Schema for allowed transformations for tiles within a tileset.
 type TiledTilesetTransformations struct {
 	// Indicates whether tiles can be flipped horizontally.                                         
-	Hflip                                                                                      bool `json:"hflip"`
+	Hflip                                                                                      bool `json:"hflip" yaml:"hflip"`
 	// Indicates whether untransformed tiles remain preferred, or if transformed tiles are used     
 	// to produce more variations.                                                                  
-	Preferuntransformed                                                                        bool `json:"preferuntransformed"`
+	Preferuntransformed                                                                        bool `json:"preferuntransformed" yaml:"preferuntransformed"`
 	// Indicates whether tiles can be rotated in 90-degree increments.                              
-	Rotate                                                                                     bool `json:"rotate"`
+	Rotate                                                                                     bool `json:"rotate" yaml:"rotate"`
 	// Indicates whether tiles can be flipped vertically.                                           
-	Vflip                                                                                      bool `json:"vflip"`
+	Vflip                                                                                      bool `json:"vflip" yaml:"vflip"`
 }
 
 // Schema for a Wang set for advanced tile auto-mapping.
 type TiledWangSet struct {
 	// The class of the Wang set (since Tiled 1.9, optional).                 
-	Class                                                    *string          `json:"class,omitempty"`
+	Class                                                    *string          `json:"class,omitempty" yaml:"class,omitempty"`
 	// An array of Wang colors (since Tiled 1.5).                             
-	Colors                                                   []TiledWangColor `json:"colors"`
+	Colors                                                   []TiledWangColor `json:"colors" yaml:"colors"`
 	// The name of the Wang set.                                              
-	Name                                                     string           `json:"name"`
+	Name                                                     string           `json:"name" yaml:"name"`
 	// An array of Properties.                                                
-	Properties                                               []TiledProperty  `json:"properties,omitempty"`
+	Properties                                               []TiledProperty  `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// The local ID of the tile representing the Wang set.                    
-	Tile                                                     int64            `json:"tile"`
+	Tile                                                     int64            `json:"tile" yaml:"tile"`
 	// Can be `corner`, `edge`, or `mixed` (since Tiled 1.5).                 
-	Type                                                     WangsetType      `json:"type"`
+	Type                                                     WangsetType      `json:"type" yaml:"type"`
 	// An array of Wang tiles.                                                
-	Wangtiles                                                []TiledWangTile  `json:"wangtiles"`
+	Wangtiles                                                []TiledWangTile  `json:"wangtiles" yaml:"wangtiles"`
 }
 
 // Schema for a color used in Wang sets (for corners or edges).
 type TiledWangColor struct {
 	// The class of the Wang color (since 1.9, optional)                
-	Class                                               *string         `json:"class,omitempty"`
+	Class                                               *string         `json:"class,omitempty" yaml:"class,omitempty"`
 	// Hex-formatted color (#RRGGBB or #AARRGGBB)                       
-	Color                                               string          `json:"color"`
+	Color                                               string          `json:"color" yaml:"color"`
 	// Name of the Wang color                                           
-	Name                                                string          `json:"name"`
+	Name                                                string          `json:"name" yaml:"name"`
 	// Probability used when randomizing                                
-	Probability                                         float64         `json:"probability"`
+	Probability                                         float64         `json:"probability" yaml:"probability"`
 	// Array of Properties (since 1.5)                                  
-	Properties                                          []TiledProperty `json:"properties,omitempty"`
+	Properties                                          []TiledProperty `json:"properties,omitempty" yaml:"properties,omitempty"`
 	// Local ID of tile representing the Wang color                     
-	Tile                                                int64           `json:"tile"`
+	Tile                                                int64           `json:"tile" yaml:"tile"`
 }
 
 // Schema for a specific tile's Wang ID (color indexes for its corners/edges).
 type TiledWangTile struct {
 	// Local ID of the tile.                         
-	Tileid                                   int64   `json:"tileid"`
+	Tileid                                   int64   `json:"tileid" yaml:"tileid"`
 	// Array of Wang color indexes (`uchar`).        
-	Wangid                                   []int64 `json:"wangid"`
+	Wangid                                   []int64 `json:"wangid" yaml:"wangid"`
 }
 
 // `zlib`, `gzip`, `zstd` (since 1.3) or empty (default). `tilelayer` only.

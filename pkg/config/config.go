@@ -31,7 +31,7 @@ type CommonPaths struct {
 
 func (p CommonPaths) LoadGameConfig() (*GameConfig, error) {
 
-	data, err := utils.ReadJSON[GameConfig](p.GameConfig)
+	data, err := utils.ReadDataFile[GameConfig](p.GameConfig)
 	if err != nil {
 		return nil, err
 	}
@@ -41,14 +41,15 @@ func (p CommonPaths) LoadGameConfig() (*GameConfig, error) {
 
 func (p CommonPaths) LoadConfig(name string, data any) error {
 	path := filepath.Join(p.Configs, name)
-	if _, err := utils.ReadJSON(path, data); err != nil {
+	if _, err := utils.ReadDataFile(path, data); err != nil {
 		return err
 	}
 
 	return nil
 }
 
-func NewCommonPaths(name string, isMod bool) (cp CommonPaths, err error) {
+func NewCommonPaths(name string) (cp CommonPaths, err error) {
+	isMod := name != "core"
 	appDir, err := ppaths.GetUserGameDir()
 	if err != nil {
 		// TODO: Better error handling/logging
@@ -72,16 +73,16 @@ func NewCommonPaths(name string, isMod bool) (cp CommonPaths, err error) {
 		Images:     filepath.Join(assetsDir, "images"),
 		Tarot:      filepath.Join(assetsDir, "tarot"),
 		Configs:    cfgDir,
-		GameConfig: filepath.Join(cfgDir, "game_config.json"),
-		EntityDefs: filepath.Join(cfgDir, "entity_defs.json"),
+		GameConfig: filepath.Join(cfgDir, "game_config.yaml"),
+		EntityDefs: filepath.Join(cfgDir, "entity_defs.yaml"),
 		Schemas:    filepath.Join(cfgDir, "schemas"),
 	}, nil
 }
 
 var CorePaths CommonPaths
 
-func NewGameConfig() GameConfig {
-	return GameConfig{
+func NewGameConfig() *GameConfig {
+	return &GameConfig{
 		EnabledModIDS:    []string{},
 		ScreenMode:       game_config.Window,
 		ScreenResolution: game_config.HeightWidthPair{Height: 640, Width: 480},
@@ -96,7 +97,7 @@ var CurrentSettings = NewGameConfig()
 
 func init() {
 
-	paths, err := NewCommonPaths("core", false)
+	paths, err := NewCommonPaths("core")
 	if err != nil {
 		// TODO: Improve error handling
 		panic(err)
@@ -123,7 +124,8 @@ func init() {
 	if cfg, err := CorePaths.LoadGameConfig(); err != nil {
 		panic(fmt.Errorf("failed to load game config: %w", err))
 	} else {
+		logging.LogDebug("screen res", cfg.ScreenResolution)
 		// TODO: load mod paths
-		CurrentSettings = *cfg
+		CurrentSettings = cfg
 	}
 }

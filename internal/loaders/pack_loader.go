@@ -2,31 +2,58 @@ package loaders
 
 import (
 	"drawn-by-fate/pkg/config"
-	"drawn-by-fate/pkg/models/auto_types/entity_defs"
+	"drawn-by-fate/pkg/logging"
+	"drawn-by-fate/pkg/models"
+	"drawn-by-fate/pkg/models/auto_types/pack_data"
 )
 
-type PackData struct {
-	Name          string
-	ID            string
-	AppVersion    string
-	SchemaVersion string
-	ModVersion    string
-	EntityDefs    *entity_defs.EntityDefs
-	LoadOrder     int64
-	Paths         *config.CommonPaths
-	Dependencies  []string
+type PackData = pack_data.PackData
+
+type AssetMaps struct {
+	Audio  map[string]string
+	Fonts  map[string]string
+	Images map[string]string
+	Tarot  map[string]string
+	// TODO: Add more sections as more assets are implemented
 }
 
-func NewGameMod(modId string) PackData {
-	return PackData{}
+type PackLoader struct {
+	ModPacks  []PackData
+	CorePack  PackData
+	AssetMaps *AssetMaps
 }
 
-type ModLoader struct {
-	Mods []PackData
-	Core PackData
+func (p *PackLoader) OrderPacks() error {
+	
+	return nil
 }
 
-func NewModLoader() *ModLoader {
+func NewPackLoader() (*PackLoader, error) {
 
-	return &ModLoader{}
+	activePacks := config.CurrentSettings.EnabledModIDS
+	modPacks := make([]PackData, 0, len(activePacks))
+
+	for _, pack := range activePacks {
+		packData, err := models.LoadPackData(pack)
+		if err != nil {
+			logging.LogWarning(err)
+			continue
+		}
+
+		modPacks = append(modPacks, *packData)
+
+	}
+
+	core, err := models.LoadPackData("core")
+	if err != nil {
+		return nil, err
+	}
+
+	loader := &PackLoader{
+		ModPacks:  modPacks,
+		CorePack:  *core,
+		AssetMaps: &AssetMaps{},
+	}
+
+	return loader, nil
 }

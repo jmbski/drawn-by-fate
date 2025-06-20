@@ -1,7 +1,0 @@
-# yaml-language-server: $schema=https://json-schema.org/draft-07/schema#
-title: Pack Data
-type: object
-description: Meta data for a content package
-properties:
-  name:
-    type: string
